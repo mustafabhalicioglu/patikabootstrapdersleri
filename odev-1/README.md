@@ -1,0 +1,1 @@
+#[patika.dev](https://www.patika.dev) tarafından düzenlenen boostrap dersleri kapsamında yapılan ilk ödev.
