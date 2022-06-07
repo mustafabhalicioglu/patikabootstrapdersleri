@@ -1,0 +1,360 @@
+<!-- 1- öncelikle bootsraptin 4.6 versiyonunun js ve css dosyalarını indirdim ve klasörün içine ekledim. 
+    ***********UNUTMA: bootstrap 5 ve sonrasında mr ve ml yerine ms ve me kullanılıyor.************* 
+    2- Fontawesome sitesinden web için ikonları download ettim ve onu da klasöre ekledim.
+    3- Bootstrap 5'in altında jquery ihtiyacı olduğu için onun da https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js adresini explorerda açtım ve save yaptım onu da js klasörü içerisine kaydettim.
+    4- index.html oluşturdum ve meta kısmını bootstrap sayfasındaki template ile aynı yaptım
+    5- metanın altına css linki ekledim ve css klasörünün içerisinde bootstrap.min.css dosyasını seçtim.
+    6- bir css linki daha ekledim href'te fontawesome içinden css içinden all.min.css seçtim
+    7- Aynı template de olduğu gibi body'nin içerisinde hem jquery hem de bundle source larını script içerisine ekledim. bunun için template bak ve aynı isimli dosyaları seç.
+    8- ÖNEMLİ: indexi chrome da açıp devtools a gittim ve console'ı kontrol ettim herhangi bir hata var mı diye. eğer bir hata olursa yazdığımız linklere ulaşılamazsa buradan kırmızı ile uyarı veriyor.
+    10- ÖNEMLİ: External css komutlarım için kendim bir medium.css isminde bir css dosyası oluşturdum ve bunu css klasörü içine ekledim. linkini de css linklerinin en altına ekledim. çünki en sondaki css diğerlerinin üstüne yazar unutma...
+    - Bu projede yalnız mümkün olduğu kadar css komutları yerine bootsrap classları kullanmaya çalışacağız.
+
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- meta bootsrap template ile aynı -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- css ve fontawesome linkleri -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/medium.css">
+
+    <script src="https://kit.fontawesome.com/3d69e2c20e.js" crossorigin="anonymous"></script>
+
+    <!-- Navbar arka plan rengini sayfa aşağı yukarı kaydırırken değiştirmek için bir javascript ekledim -->
+    <script>
+        function scrollValue() {
+    var navigasyon = document.getElementById('navigasyon');
+    var scroll = window.scrollY;
+    if (scroll < 400) {
+        navigasyon.classList.remove('BgColour');
+    } else {
+        navigasyon.classList.add('BgColour');
+    }
+}
+
+window.addEventListener('scroll', scrollValue);
+    </script>
+    
+    <title>Medium</title>
+</head>
+<body>
+<!-- ******NAVBAR******
+    medium sitesinin en üstinde bir navbar var bizde bootsrapten bir nav bar komutu alıyoruz. ve brand yazan kısma medium sitesindeki amblemin üzerine inspect yapıp svgyi aynen kopyaladım ama svg gelmediği için geri sildim ve medium yazdım. 
+    - menünün en sonundaki link bir buton olduğu için onun class'ını btn btn-dark olarak değiştirdim 
+    - menüdeki amblem dışındaki liste elemanlarının sağda olması için ul'nin clasına ml-auto (ms-auto olacak 5 ve üstü versiyonlarda)ekledim.
+    - menü sayfanın tamamını kaplıyordu, ancak container içerisine alıncak ve ortada 12'li grid şeklinde duracak. container içine aldım.
+    -arkasına bir bg-color vermek için tekrar bu container'ı bir div içine aldım. ancak burada inline css yani style ile bg-color verdim. ancak nav'ın class'larında bg-light vardı onu sildim.
+    - bir home linki ekledim ve sadece bunun classını aktiv yaptım ve current bunun içinde duruyor.
+    - sayfada nav-bar'ın altında onu da kaplayan bir çizgi var bunu yine div içerisinde css kullanarak ekledim. bunun için border-bottom css komutunu kullandım.
+    - bazı link ve butonların renkleri solukdu sonra fark ettim onların disabled class'ları var bu class'ları sildim.
+
+-->
+    <div id="navigasyon" class="navigasyon bg-yellow border-bottom-dark sticky-top">
+        <div class="container">    
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><strong>Medium</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Our Story</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Membership</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Write</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link btn btn-dark text-light ml-3">Get started</a>
+                    </li>
+                </ul>
+                </div>
+            </nav>            
+        </div>
+    </div>
+<!-- ****TITLE SECTİON******** 
+        Nav'ın altında 6 + 6 kolumluk iki başlangıç yapısı var ve bu nav ile aynı back-ground içerisinde onun için aynı container altına bir div (section) yapısı oluşturdum. bunun içine de row classlı bir div daha ve içine iki tane col-sm-6 oluşturdum. section'a bir genişlik vermek için top ve bottom için padding ver py-5 classı ile.
+        -Google Font kullanarak bir pt-serif in normal italik ve dark versiyonlarını seçip linkini benim medium css linkinin üstüne koydum.
+        -H1'i büyütmek için display-2 class'ını kullandım (css'de font-size: 85px'de denebilirdi)
+        - paragrafı ikiye bölmek için <br> kullandım. paragrafın biraz daha büyük görünmesi için bootstrap .lead class'ı kullandım.
+        -->
+    <section class="bg-yellow border-bottom-dark py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="display-2 title-heading">Stay Curious.</h1>
+                    <p class="lead">Discover stories, thinking, and expertise <br> from writers on any topic.</p>
+                    <button class="btn btn-dark text-ligth">Start reading</button>
+                </div>
+                <div class="col-sm-6">
+                    <img src="https://cdn-static-1.medium.com/sites/medium.com/creators/images/Illustrations-Dimensional-1.png" alt="image" style="height: 300px; background-color: transparent;" class="rounded-circle float-right">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--**********İÇERİK GİRİŞ-********
+    - en üste 12'lik tek cümlelik bir yer. Bu yazıyı h6 olarak belirledik içine bir icon koyduk ikon ile arasını ml-2 (ms-2) ile biraz açtık.
+    altına 3 tane kolumn oluşturuyoruz herbiri 4'lük olacak -->  
+
+    <section class="border-bottom"> <!-- İçerik Giriş Bölümü Start-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-sm-12 mb-2">
+                    <h6><i class="fa-solid fa-arrow-trend-up"></i><small class="ml-2"> TRENDING ON MEDIUM</small></h6>
+                </div>
+            
+            <!-- içerik kısmı aynı row içine 6 tane 4'lük column bunları article olarak belirliyoruz. herbiri 4'lük olduğu için 3 taneden sonrası alta gözükecek.
+            -Tarihleri inline-li olarak ayarlardık. bunun için bootstrapt'in inline li komutlarını aldık.
+            - özellikle margin padding classları verirken elementin kendisine verin içindekilere verirseniz işlemeye bilir.
+        -->
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">01</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/15/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Arthur Hayes</a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>Shut it Down!</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">June 2</li>
+                            <li class="list-inline-item">18 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">02</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/16/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Kevin Beaumont in Pulsar</a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>Follina — a Microsoft Office code execution vulnerability</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">May 29</li>
+                            <li class="list-inline-item">8 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">03</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/17/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Emma Twersky
+                        </a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>Angular v14 is now available!</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">June 2</li>
+                            <li class="list-inline-item">8 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">04</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/20/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">
+                            Bernice Puzon in Fanfare</a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>The Winner of American Idol is… Another White Boy With a Guitar</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">May 31</li>
+                            <li class="list-inline-item">3 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">05</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/19/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">umair haque in Medium
+                        </a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>The Age of Extinction Is Here—Some of Us Just Don’t Know It Yet</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">May 21</li>
+                            <li class="list-inline-item">18 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="col-sm-4 mb-3">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4 class="numbers">06</h4> 
+                    </div>
+                    <div class="col-sm-11 pl-4">
+                        <img src="https://picsum.photos/id/21/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Isaiah McCall</a></span>
+                        <h6 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>YouTube is Dead and Something New is Replacing It</strong></a></h6>
+                        <ul class="list-inline small text-black-50">
+                            <li class="list-inline-item">June 3</li>
+                            <li class="list-inline-item">5 min read</li>
+                            <li class="list-inline-item">
+                                <i class="fa-solid fa-star"></i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </article>            
+
+            </div>
+        </div>       
+    </section> <!-- İçerik Giriş Bölümü End-->
+
+    <!-- *******ALT BÖLÜM************ 
+    Bu bölümde sağ tarafta linkler ve about gibi kısımların olduğu <aside> var bunun için 4'lük bir colum oluşturuldu. buradaki butonlar bootsrap'in inline list komutu ile oluşturuldu. anca sayfaya benzemesi için small class kullanıldı ve right-buttons diye bir class oluşturup css içerisinde orjinal sayfadaki özellikler verildi.
+    -text-reset ve text-decoration-none class'larını a'nın içinde verdim yoksa çalışmıyor.
+    -Sağ kısımda resimlerin ve metinlerin olduğu article var.
+
+-->
+
+    <section> <!-- Alt Bölüm start-->
+        <div class="container mt-5">
+            <div class="row">
+                <article class="col-sm-8">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <img src="https://picsum.photos/id/15/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Scott Mayer</a></span>
+                            <h4 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>10 Seconds That Ended My 10-Year Career</strong></a></h4>
+                            <span class="text-secondary "><a href="" class="text-reset text-decoration-none">It’s 8:30 am and I’m seated at my desk. I’m wearing my brown Cole Haans, Banana Republic slacks and J. Crew button-down. I..</a></span>
+                            <ul class="list-inline small text-black-50 pt-2">
+                                <li class="list-inline-item">June 2</li>
+                                <li class="list-inline-item">18 min read</li>
+                                <li class="list-inline-item btn btn-light btn-sm text-black-50 rounded-pill pt-0">Lifestyle</li>
+                                <li class="list-inline-item">
+                                    <i class="fa-solid fa-star"></i>
+                                </li>
+                                <li class="list-inline-item  text-dark lead"><a href="" class="text-reset text-decoration-none">
+                                    <i class="fa-brands fa-font-awesome flag-icon "></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <img src="https://picsum.photos/id/45/200/130" alt="Picture">
+                        </div>
+                        <div class="col-sm-8 mt-5">
+                            <img src="https://picsum.photos/id/25/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">
+                                Dan Busso in Meta Research</a></span>
+                            <h4 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>In Praise of the Old School To-Do List</strong></a></h4>
+                            <span class="text-secondary "><a href="" class="text-reset text-decoration-none">And the steno pad.</a></span>
+                            <ul class="list-inline small text-black-50 pt-2">
+                                <li class="list-inline-item">June 2</li>
+                                <li class="list-inline-item">18 min read</li>
+                                <li class="list-inline-item btn btn-light btn-sm text-black-50 rounded-pill pt-0">Lifestyle</li>
+                                <li class="list-inline-item">
+                                    <i class="fa-solid fa-star"></i>
+                                </li>
+                                <li class="list-inline-item  text-dark lead"><a href="" class="text-reset text-decoration-none">
+                                    <i class="fa-brands fa-font-awesome flag-icon "></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 mt-5">
+                            <img src="https://picsum.photos/id/78/200/130" alt="Picture">
+                        </div>
+                        <div class="col-sm-8 mt-5">
+                            <img src="https://picsum.photos/id/37/20/20?grayscale" class="rounded-circle" alt=""> <span><a href="" class="text-reset text-decoration-none small ml-1">Alex Kantrowitz</a></span>
+                            <h4 class="mt-2"><a href=""class="text-reset text-decoration-none "><strong>Dall-E can illustrate just about anything using a short text prompt. Should it?</strong></a></h4>
+                            <span class="text-secondary "><a href="" class="text-reset text-decoration-none">Dall-E can illustrate just about anything using a short text prompt. Should it?</a></span>
+                            <ul class="list-inline small text-black-50 pt-2">
+                                <li class="list-inline-item">June 2</li>
+                                <li class="list-inline-item">18 min read</li>
+                                <li class="list-inline-item btn btn-light btn-sm text-black-50 rounded-pill pt-0">Health</li>
+                                <li class="list-inline-item">
+                                    <i class="fa-solid fa-star"></i>
+                                </li>
+                                <li class="list-inline-item  text-dark lead"><a href="" class="text-reset text-decoration-none">
+                                    <i class="fa-brands fa-font-awesome flag-icon "></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4 mt-5">
+                            <img src="https://picsum.photos/id/84/200/130" alt="Picture">
+                        </div>
+                    </div>
+                </article>
+                <aside class="col-sm-4 pl-5">
+                    <div class="col-sm-12 mb-2 pl-0">
+                        <h6><small class="font-weight-bold"> DISCOVER MORE OF WHAT MATTERS TO YOU</small></h6>
+                    </div>
+                    <ul class="list-inline border-bottom">
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons ">Self</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons">Relationships</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons">Data Science</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons">Programming</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons">Productivity</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-2 right-buttons">Javascript</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-4 right-buttons">Machine Learning</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-4 right-buttons">Politics</li>
+                        <li class="list-inline-item btn btn-outline-secondary btn-sm mb-4 right-buttons">Health</li>
+                      </ul>
+
+                      <ul class="list-inline mr-4">
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Help</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Status</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Writers</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Blog</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Careers</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Privacy</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Terms</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">About</a></li>
+                        <li class="list-inline-item small text-secondary"><a href="" class="text-reset text-decoration-none">Knowable</a></li>
+                      </ul>
+                </aside>
+        </div>
+    </section> <!-- Alt Bölüm end-->
+
+    
+    <!-- java scriptler jsquary ve bootsrap bundle var -->
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+    
+
+</body>
+</html>
