@@ -1,4 +1,5 @@
 # Ödev 3
+[patika.dev](https://patika.dev) bootstrap dersleri kapsamında yaptığım üçüncü ve son ödev.
 
 ## Bootstrap Linkedin Clone
 
